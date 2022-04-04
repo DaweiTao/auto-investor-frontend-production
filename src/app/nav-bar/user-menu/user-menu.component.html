@@ -1,0 +1,10 @@
+<div id="menu-container" fxLayout="row" fxLayoutAlign="end center">
+    <a id="user-menu-btn" mat-button [matMenuTriggerFor]="menu" fxLayout="row" fxLayoutAlign="center center">  
+        <img id="avatar" *ngIf="avatarSrc" [src]="avatarSrc">
+        <span id="username" *ngIf="userName"> {{userName.length > 12 ? userName.slice(0, 12) + "..." : userName}} </span>
+    </a>
+</div>
+
+<mat-menu id="user-menu" #menu="matMenu"  xPosition="before">
+    <a mat-menu-item (click)="onLogout()"> Logout </a>
+</mat-menu>

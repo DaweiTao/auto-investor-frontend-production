@@ -1,0 +1,93 @@
+<section id="quote-panel" *ngIf="currentHoverData" class="mat-elevation-z8">
+
+    <div class="container" fxLayout="row" fxLayoutAlign="start center">
+        <div>
+            <div id="symbol" class="large" fxLayout="row" fxLayoutAlign="start center">
+                <div>
+                    {{currentHoverData.localDateShort}}
+                </div>
+            </div>
+            <div class="medium" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="3px">
+                <div >{{currentHoverData.close | number : '1.2-2'}}</div>
+                <div >{{currentHoverData.contract.currency}}</div>
+                <div>
+                    <mat-icon *ngIf="currentHoverData.change >= 0"class="material-icons-outlined win"> trending_up </mat-icon>
+                    <mat-icon *ngIf="currentHoverData.change < 0" class="material-icons-outlined loss"> trending_down </mat-icon> 
+                </div>
+            </div>
+        </div>
+
+        <div fxFlex fxLayout="column" fxLayoutAlign="center end" [ngClass]="{'win': currentHoverData.percentChange >= 0, 'loss': currentHoverData.percentChange < 0}">
+            <div id="percent-change" class="large" fxLayout="row" fxLayoutAlign="end center">
+                {{currentHoverData.percentChange >= 0 ? "+" : ""}}{{currentHoverData.percentChange | number : '1.2-2'}}%
+            </div>
+            <div id="change" class="medium" fxLayout="row" fxLayoutAlign="end center">
+                {{currentHoverData.change >= 0 ? "+" : ""}}{{currentHoverData.change | number : '1.2-2'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <div id="long-name">
+                Selected
+            </div>
+            <div>
+                {{currentHoverData.localDateLong}} {{currentHoverData.contract.timeZoneId}}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table ">
+            <tr>
+                <td>
+                    <div class="data-group">
+                        <div>High</div>
+                        <div>{{currentHoverData.high}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Open</div>
+                        <div>{{currentHoverData.open}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Volume</div>
+                        <div>{{currentHoverData.volume}}</div>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr>
+                <td>
+                    <div class="data-group">
+                        <div>Low</div>
+                        <div>{{currentHoverData.low}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Prev. Close</div>
+                        <div>{{currentHoverData.prevClose}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Average</div>
+                        <div>{{currentHoverData.average}}</div>
+                    </div>
+                </td>
+            </tr>
+
+        </div>
+
+        
+    </div>
+</section>
+
+<!-- <div>
+    {{currentHoverData | json}}
+</div> -->

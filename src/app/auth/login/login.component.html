@@ -1,0 +1,40 @@
+<section id="login-page" class="page" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30">
+    <mat-card id="err-msg" fxLayout="column" fxLayoutAlign="center center" *ngIf="loginErrMsg">
+        <p> {{loginErrMsg}} </p>
+    </mat-card>
+
+    <!-- <mat-card id="login-success" fxLayout="column" fxLayoutAlign="center center" *ngIf="loginSuccessMsg">
+        <p> {{loginSuccessMsg}} </p>
+    </mat-card> -->
+
+    <mat-card id="login-card" class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="center center">
+        
+        <div id="spinner-container" *ngIf="isLoading" fxLayoutAlign="center center">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <div *ngIf="!isLoading">
+            <mat-card-content>
+                <form action="" [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="start center" (ngSubmit)="onSubmit()">        
+                    <mat-form-field appearance="fill"> 
+                        <mat-label> Enter your email </mat-label>
+                        <input matInput type="email" placeholder="email" formControlName="emailCtl" required>
+                        <mat-error *ngIf="!isValidEmail()">{{getErrMsgEmail()}}</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill">
+                        <mat-label> Enter your password </mat-label>
+                        <input matInput type="password" placeholder="password" formControlName="passwordCtl" required>
+                        <mat-error *ngIf="!isValidPassword()"> {{getErrMsgPassword()}} </mat-error>
+                    </mat-form-field>
+            
+                    <button mat-raised-button id="login-btn" type="submit" color="primary" [disabled]="!isValidLoginForm() || isLoading"> 
+                        Login
+                    </button>
+            
+                </form>
+            </mat-card-content>
+        </div>
+
+    </mat-card>
+</section>

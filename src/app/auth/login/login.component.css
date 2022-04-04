@@ -1,0 +1,47 @@
+#login-page{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+mat-card{
+    width: 320px;
+}
+
+mat-hint {
+    font-size: small;
+}
+
+mat-error {
+    font-size: small;
+}
+
+mat-form-field{
+    width: 250px;
+    height: 50px;
+    margin-bottom: 50px;
+}
+
+mat-card-content{
+    margin: 0px;
+}
+
+#login-btn{
+    width: 250px;
+    height: 50px;
+    padding: 0px;
+    font-size: large;
+}
+
+#login-card{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#spinner-container{
+    height: 350px;
+}
+
+#err-msg{
+    width: 320px;
+    background-color: red;
+}

@@ -1,0 +1,56 @@
+#quote-panel{
+    padding: 10px;
+    border-radius: 5px;
+    color: #d1d1d1;
+    background-color: rgb(87, 87, 87);
+}
+
+.container{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+mat-icon{
+    position: relative;
+    top: 3px;
+}
+
+.data-group{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.data-group div{
+    width: 85px;
+    height: 20px;
+}
+
+.large{
+    height: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.medium{
+    height: 24px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.table {
+    /* background-color: rgb(55, 55, 55); */
+    /* padding-left: 10px; */
+    /* padding-top: 10px; */
+    /* border-radius: 5px; */
+    margin-bottom: 10px;
+    /* margin-top: 10px; */
+}
+
+#symbol{
+    color: orange;
+}
+
+#long-name{
+    font-weight: bold;
+}

@@ -1,0 +1,22 @@
+<section id="charts" class="page" fxLayout="row">
+    <div id="symbol-selector-container">
+        <app-symbol-selector></app-symbol-selector>
+    </div>
+    
+    <ng-scrollbar id="scroll" track="all" visibility="native">
+        <div id="main-content" fxLayout="row">
+            <div id="guide" *ngIf="!(cs.selectedSymbol$ | async)">
+                <app-charts-guide></app-charts-guide>
+            </div>
+
+            <div id="main-chart-container" *ngIf="cs.selectedSymbol$ | async">
+                <app-main-chart></app-main-chart>
+            </div>
+
+            <div id="panels-container" fxLayout="column" fxLayoutGap="23" *ngIf="cs.selectedSymbol$ | async">
+                <app-quote-panel></app-quote-panel>
+                <app-hover-info-panel></app-hover-info-panel>
+            </div>
+        </div>
+    </ng-scrollbar>
+</section>

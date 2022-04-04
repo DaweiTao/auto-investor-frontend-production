@@ -1,0 +1,78 @@
+a, a:hover, a:visited, a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+#symbol-selector {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(79, 79, 79);
+    color: #d1d1d1;
+    --scrollbar-size: 5px;
+    --scrollbar-thumb-color: #FFE0B2;
+    --scrollbar-track-color: rgba(0, 0, 0, 0.592);
+}
+
+.selector-content {
+    background-color: #1d2023;
+    width: 254px;
+    margin-top: 10px;
+    margin-left: 13px;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+#symbol {
+    color: orange;
+}
+
+#currency {
+    color: #d1d1d1;
+    background-color: #1979a9;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+}
+
+#right-context-section{
+    width: 100%;
+    margin-left: 10px;
+}
+
+
+.context-row {
+    height: 20px;
+    overflow: hidden;
+}
+
+#price {
+    margin-left: 10px;
+}
+
+#percent-change {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+#modifier{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.win-bg {
+    background-color: rgb(84, 188, 108);
+}
+
+.loss-bg {
+    background-color: rgb(223, 43, 43);
+}
+
+.active{
+    background-color: #39557d;
+}

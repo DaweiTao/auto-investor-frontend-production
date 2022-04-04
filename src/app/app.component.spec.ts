@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'auto-investor-frontend-production'`, () => {
+  it(`should have as title 'auto-investor-v3'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('auto-investor-frontend-production');
+    expect(app.title).toEqual('auto-investor-v3');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('auto-investor-frontend-production app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('auto-investor-v3 app is running!');
   });
 });
