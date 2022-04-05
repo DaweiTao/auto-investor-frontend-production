@@ -3,6 +3,11 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subscription, take } from 'rxjs';
 import IWatchlist from '../models/watchlist';
 import { UserAuthService } from './user-auth.service';
+import { environment } from 'src/environments/environment';
+
+
+const WATCHLIST_API_URL = environment.apiUrl + "/watchlist"
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +31,7 @@ export class WatchlistService implements OnDestroy{
   }
 
   private getUserWatchlist(uid: string) {
-    this.http.get<IWatchlist>(`http://localhost:3000/api/watchlist/${uid}`)
+    this.http.get<IWatchlist>(WATCHLIST_API_URL + `/${uid}`)
       .pipe(take(1))
       .subscribe(response => {
         if(response) {
@@ -49,7 +54,7 @@ export class WatchlistService implements OnDestroy{
       uid: this.currentUid,
       watchlist: watchlist,
     }
-    this.http.post<IWatchlist>("http://localhost:3000/api/watchlist/update", newWatchlistReqBody)
+    this.http.post<IWatchlist>(WATCHLIST_API_URL + "/update", newWatchlistReqBody)
       .pipe(take(1))
       .subscribe(response => {
         if(response && response.watchlist) {

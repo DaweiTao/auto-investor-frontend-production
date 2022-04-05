@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, firstValueFrom, ReplaySubject } from 'rxjs';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 
 export interface SignupData{
   email: string,
@@ -26,6 +28,9 @@ interface Profile {
   createdAt: string,
   updatedAt: string,
 }
+
+
+const AUTH_API_URL = environment.apiUrl + '/auth'
 
 
 @Injectable({
@@ -68,20 +73,19 @@ export class UserAuthService {
   }
 
   public async signUp(signupData: SignupData) {
-    const response: any = await firstValueFrom(this.http.post("http://localhost:3000/api/auth/signup", signupData))
+    const response: any = await firstValueFrom(this.http.post(AUTH_API_URL + "/signup", signupData))
     if (!response.success) {
       throw response.message
     }
   }
 
   public async login(loginData: LoginData) {
-    const response: any = await firstValueFrom(this.http.post("http://localhost:3000/api/auth/login", loginData))
+    const response: any = await firstValueFrom(this.http.post(AUTH_API_URL + "/login", loginData))
     if (response.success) {
       // handle jwt
       this.saveToken(response.token)
       this.saveUserProfile(response.userProfile)
       this.isAuth$.next(true)
-      console.log("Login set isAuth to true")
       this.currentUserProfile$.next(response.userProfile)
       this.router.navigate(["/watchlist"])
     } else {

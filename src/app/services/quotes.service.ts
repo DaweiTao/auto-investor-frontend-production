@@ -4,6 +4,11 @@ import * as moment from 'moment-timezone';
 import { BehaviorSubject, ReplaySubject, Subscription, take } from 'rxjs';
 import IQuotes from '../models/quotes';
 import { WatchlistService } from './watchlist.service';
+import { environment } from 'src/environments/environment';
+
+
+const QUOTES_API_URL = environment.apiUrl + '/quotes'
+
 
 export interface Quote {
   contract: any,
@@ -63,7 +68,7 @@ export class QuotesService {
       return 
     }
     let params = new HttpParams().set('symbols', JSON.stringify(this.currentWatchlist));
-    this.http.get<IQuotes[]>(`http://localhost:3000/api/quotes`, {params})
+    this.http.get<IQuotes[]>(QUOTES_API_URL, {params})
     .pipe(take(1))
     .subscribe(quoteDocs => {
       if(quoteDocs) {

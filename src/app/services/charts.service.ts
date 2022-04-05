@@ -3,12 +3,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 import ITickerDoc, { ITicker } from '../models/tickerData';
 import * as moment from 'moment-timezone';
+import { environment } from 'src/environments/environment';
+
 
 export interface CandlestickDataStore {
   contract: any,
   candlestickData: number[][],
   tickerData: ITicker[],
 }
+
 
 export interface Hoverdata extends ITicker{
   contract: any,
@@ -17,6 +20,10 @@ export interface Hoverdata extends ITicker{
   localDateShort: string,
   localDateLong: string,
 }
+
+
+const TICKER_DATA_URL = environment.apiUrl + '/ticker-data'
+
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +70,7 @@ export class ChartsService {
       return
     }
     let params = new HttpParams().set('symbol', symbol);
-    this.http.get<ITickerDoc>(`http://localhost:3000/api/ticker-data`, {params})
+    this.http.get<ITickerDoc>(TICKER_DATA_URL, {params})
     .pipe(take(1))
     .subscribe(tickerDataDoc => {
       if(!tickerDataDoc) {
