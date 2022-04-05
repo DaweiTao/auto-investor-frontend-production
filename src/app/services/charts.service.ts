@@ -98,7 +98,7 @@ export class ChartsService {
         contract: tickerDataDoc.contract,
         tickerData: tickerDataDoc.tickerData,
       })
-      console.log("Candlestick Updater: ", tickerDataDoc)
+      // console.log("Candlestick Updater: ", tickerDataDoc)
     })
   }
 }

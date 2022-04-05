@@ -47,7 +47,7 @@ export class WatchlistService implements OnDestroy{
 
   public updateWatchlist(watchlist: string[]) {
     if (!this.currentUid) {
-      console.log("Watchlist update failed, uid is null")
+      // console.log("Watchlist update failed, uid is null")
       return
     }
     const newWatchlistReqBody = {

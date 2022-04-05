@@ -105,7 +105,7 @@ export class QuotesService {
           newQuotes.push(q)
         }
         this.quotes$.next(newQuotes)
-        console.log("Qutoes Updater: ", newQuotes)
+        // console.log("Qutoes Updater: ", newQuotes)
       }
     })
   }

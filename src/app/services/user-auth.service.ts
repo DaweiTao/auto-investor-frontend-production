@@ -46,7 +46,7 @@ export class UserAuthService {
 
   public initSession() {
     const token = this.getToken()
-    console.log(`Token retrieved: (${token})`)
+    // console.log(`Token retrieved: (${token})`)
     
     if (token == "foo") {
       this.logout()
@@ -54,10 +54,10 @@ export class UserAuthService {
     }
 
     const isTokenExpired = this.isTokenExpired(token)
-    console.log("Is token expired: ", isTokenExpired)
+    // console.log("Is token expired: ", isTokenExpired)
 
     if (isTokenExpired) {
-      console.log("Token expired or invalid, logout")
+      // console.log("Token expired or invalid, logout")
       this.logout()
       return
     }
@@ -128,11 +128,11 @@ export class UserAuthService {
     try {
       let nowMillisec = moment().valueOf()
       let expiresExpMillisec = this.getTokenExpirationEpoch(token) * 1000
-      console.log("Current date: ", moment(nowMillisec).format("DD MMM YYYY hh:mm a"))
-      console.log("Expiration date: ", moment(expiresExpMillisec).format("DD MMM YYYY hh:mm a"))
+      // console.log("Current date: ", moment(nowMillisec).format("DD MMM YYYY hh:mm a"))
+      // console.log("Expiration date: ", moment(expiresExpMillisec).format("DD MMM YYYY hh:mm a"))
       return nowMillisec > expiresExpMillisec
     } catch (e) {
-      console.log("Token err: ", e);
+      // console.log("Token err: ", e);
       return true
     }
   }
