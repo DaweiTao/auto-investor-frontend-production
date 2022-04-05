@@ -2,8 +2,8 @@
     <mat-toolbar fxLayout="row">
         <div id="nav-start" fxLayoutAlign="start center" fxLayoutGap="10">
             <a mat-raised-button color="primary" routerLink="/home" routerLinkActive="active"> Home </a>
-            <a mat-raised-button color="primary" routerLink="/watchlist" routerLinkActive="active"> Watchlist </a>
-            <a mat-raised-button color="primary" routerLink="/charts" routerLinkActive="active"> Charts </a>
+            <a *ngIf="auth.isAuth$ | async" mat-raised-button color="primary" routerLink="/watchlist" routerLinkActive="active"> Watchlist </a>
+            <a *ngIf="auth.isAuth$ | async" mat-raised-button color="primary" routerLink="/charts" routerLinkActive="active"> Charts </a>
             <!-- <a class="nav-btn" mat-raised-button routerLink="/charts" routerLinkActive="active"> Charts </a> -->
         </div>
 
