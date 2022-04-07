@@ -1,0 +1,23 @@
+<section id="main-chart">
+    <!-- <div id="range-selector-container" fxLayout="row" fxLayoutAlign="start center">
+        <mat-button-toggle-group #group="matButtonToggleGroup" [value]="selectedRange" (change)="onRangeChange(group.value)">
+            <mat-button-toggle value="3M"> 3M </mat-button-toggle>
+            <mat-button-toggle value="6M"> 6M </mat-button-toggle>
+            <mat-button-toggle value="1Y"> 1Y </mat-button-toggle>
+            <mat-button-toggle value="5Y"> 5Y </mat-button-toggle>
+            <mat-button-toggle value="YTD"> YTD </mat-button-toggle>
+            <mat-button-toggle value="All"> All </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div> -->
+
+    <div *ngIf="chartOptions" id="candlestick-chart-container">
+        <highcharts-chart style="width: 100%; height: 100%; display: block"
+            [Highcharts]="Highcharts"
+            [constructorType]="'stockChart'"
+            [options]="chartOptions"
+            [callbackFunction]="chartCallback"
+            [(update)]="mainChartUpdateFlag"
+            >
+        </highcharts-chart>
+    </div>
+</section>

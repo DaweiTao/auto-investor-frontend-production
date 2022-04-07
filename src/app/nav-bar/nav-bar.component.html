@@ -1,0 +1,21 @@
+<section id="nav-bar-container" class="mat-elevation-z8">
+    <mat-toolbar fxLayout="row">
+        <div id="nav-start" fxLayoutAlign="start center" fxLayoutGap="10">
+            <a mat-raised-button color="primary" routerLink="/home" routerLinkActive="active"> Home </a>
+            <a *ngIf="auth.isAuth$ | async" mat-raised-button color="primary" routerLink="/watchlist" routerLinkActive="active"> Watchlist </a>
+            <a *ngIf="auth.isAuth$ | async" mat-raised-button color="primary" routerLink="/charts" routerLinkActive="active"> Charts </a>
+            <!-- <a class="nav-btn" mat-raised-button routerLink="/charts" routerLinkActive="active"> Charts </a> -->
+        </div>
+
+        <div id="nav-end" fxLayoutAlign="end center" fxLayoutGap="10">
+            <a *ngIf="!(auth.isAuth$ | async)" mat-raised-button color="primary" routerLink="/signup" routerLinkActive="active"> Signup </a>
+            <a *ngIf="!(auth.isAuth$ | async)" mat-raised-button color="primary" routerLink="/login" routerLinkActive="active"> Login </a>
+            <div id="user-menu" *ngIf="auth.isAuth$ | async">
+                <app-user-menu 
+                    [userName]="(auth.currentUserProfile$ | async)?.username"
+                    [avatarSrc]="(auth.currentUserProfile$ | async)?.avatarSrc"
+                ></app-user-menu>
+            </div>
+        </div>
+    </mat-toolbar>
+</section>

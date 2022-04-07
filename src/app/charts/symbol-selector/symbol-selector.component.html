@@ -1,0 +1,43 @@
+<ng-scrollbar id="symbol-selector" track="vertical">
+
+    <a 
+        *ngFor="let q of currentQuotes" >
+
+        <div 
+            matRipple 
+            class="mat-elevation-z8 selector-content" 
+            [routerLink]="['/charts', q.symbol]" 
+            routerLinkActive="active" 
+            fxLayout="row"
+            fxLayoutAlign="start center">
+
+            <div id="currency">
+                {{q.currency}}
+            </div>
+
+            <div id="right-context-section" fxLayout="column" fxLayoutGap="5">
+                <div class="context-row" fxLayout="row">
+                    <div id="symbol"> {{q.symbol}} </div>
+
+                    <div fxFlex fxLayoutAlign="end center" fxLayout="row" fxLayoutGap="10">
+                        <div id="price" > {{q.price | number: '1.2-2'}} </div>
+                        <div id="percent-change" [ngClass]="q.percentChange >= 0 ? 'win-bg' : 'loss-bg'"> 
+                            {{q.percentChange >= 0? "+" : ""}}{{q.percentChange | number: '1.2-2'}}% 
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="context-row">
+                    {{q.longName}}
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <div id="modifier" fxFlexAlign="end center" fxLayoutAlign="center center" >
+        <button mat-raised-button color="primary" (click)="onUpdate()">
+            <mat-icon>refresh</mat-icon> Update
+        </button>
+    </div>
+
+</ng-scrollbar>

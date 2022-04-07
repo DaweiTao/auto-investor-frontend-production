@@ -1,0 +1,114 @@
+<section id="quote-panel" *ngIf="currentQuote" class="mat-elevation-z8">
+
+    <div class="container" fxLayout="row" fxLayoutAlign="start center">
+        <div>
+            <div id="symbol" class="large" fxLayout="row" fxLayoutAlign="start center">
+                <div>
+                    {{currentQuote.symbol}}
+                </div>
+            </div>
+            <div class="medium" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="3px">
+                <div >{{currentQuote.price | number : '1.2-2'}}</div>
+                <div >{{currentQuote.currency}}</div>
+                                <div>
+                    <mat-icon *ngIf="currentQuote.change >= 0"class="material-icons-outlined win"> trending_up </mat-icon>
+                    <mat-icon *ngIf="currentQuote.change < 0" class="material-icons-outlined loss"> trending_down </mat-icon> 
+                </div>
+            </div>
+        </div>
+
+        <div fxFlex fxLayout="column" fxLayoutAlign="center end" [ngClass]="{'win': currentQuote.percentChange >= 0, 'loss': currentQuote.percentChange < 0}">
+            <div id="percent-change" class="large" fxLayout="row" fxLayoutAlign="end center">
+                {{currentQuote.percentChange >= 0 ? "+" : ""}}{{currentQuote.percentChange | number : '1.2-2'}}%
+            </div>
+            <div id="change" class="medium" fxLayout="row" fxLayoutAlign="end center">
+                {{currentQuote.change >= 0 ? "+" : ""}}{{currentQuote.change | number : '1.2-2'}}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <div id="long-name">
+                {{currentQuote.longName}}
+            </div>
+            <div>
+                {{currentQuote.date}} {{currentQuote.timeZoneId}}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table ">
+            <tr>
+                <td>
+                    <div class="data-group">
+                        <div>High</div>
+                        <div>{{currentQuote.high}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Open</div>
+                        <div>{{currentQuote.open}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Volume</div>
+                        <div>{{currentQuote.volume}}</div>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr>
+                <td>
+                    <div class="data-group">
+                        <div>Low</div>
+                        <div>{{currentQuote.low}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Prev. Close</div>
+                        <div>{{currentQuote.prevClose}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Average</div>
+                        <div>{{currentQuote.average}}</div>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr>
+                <td>
+                    <div class="data-group">
+                        <div>Local Symbol</div>
+                        <div>{{currentQuote.contract.localSymbol}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Security Type</div>
+                        <div>{{currentQuote.contract.secType}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-group">
+                        <div>Exchange</div>
+                        <div>{{currentQuote.primaryExchange}}</div>
+                    </div>
+                </td>
+            </tr>
+
+        </div>
+
+        
+    </div>
+</section>
+
+<!-- <div>
+    {{currentQuote | json}}
+</div> -->

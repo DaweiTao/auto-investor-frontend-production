@@ -1,0 +1,68 @@
+<section id="signup-page" class="page bg-dark" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30">
+    <!-- <mat-card id="signup-err" *ngIf="signupErrMsg"> -->
+
+    <mat-card id="err-msg" class="mat-elevation-z8" *ngIf="signupErrMsg" fxLayout="column" fxLayoutAlign="center center">
+        <div>Error: {{signupErrMsg}}</div>
+    </mat-card>
+
+    <mat-card id="signup-card" class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="center center">
+        <!-- <div *ngIf="isLoading">
+            <app-loading-indicator></app-loading-indicator>
+        </div> -->
+        <div id="spinner-container" *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+            <mat-spinner></mat-spinner>
+        </div>
+       
+        <div id="form-container" *ngIf="!isLoading" fxLayout="column" fxLayoutAlign="start center" >
+
+            <img mat-card-image id="avatar" class="mat-elevation-z8" *ngIf="isValidUsername()" [src]="avatarSrc">
+
+            <mat-card-content>
+                <form action="" [formGroup]="signUpForm" fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
+                <!-- <form action="" [formGroup]="signUpForm" fxLayout="column" fxLayoutAlign="center center"> -->
+                    <mat-form-field appearance="fill"> 
+                        <mat-label> Enter username </mat-label>
+                        <input matInput type="text" placeholder="username" formControlName="usernameCtl" (input)="onChangeUsername($event)" required>
+                        <mat-hint> No special characters, except underscore </mat-hint>
+                        <mat-error *ngIf="!isValidUsername()">{{getErrMsgUsername()}}</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill"> 
+                        <mat-label> Enter email </mat-label>
+                        <input matInput type="email" placeholder="email" formControlName="emailCtl" required>
+                        <mat-error *ngIf="!isValidEmail()">{{getErrMsgEmail()}}</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill">
+                        <mat-label> Password </mat-label>
+                        <input matInput type="password" placeholder="password" formControlName="passwordCtl" (input)="onUpdatePassword()" required>
+                        <mat-hint> {{getPasswordHintMsg()}} </mat-hint>
+                        <mat-error *ngIf="!isValidPassword()"> {{getErrMsgPassword()}} </mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill" *ngIf="isValidPassword()">
+                        <mat-label> Confirm your password </mat-label>
+                        <input matInput type="password" placeholder="password" formControlName="passwordConfirmCtl" required>
+                        <mat-hint *ngIf="isValidPasswordConfirmation()"> {{getPasswordMatchMsg()}} </mat-hint>
+                        <mat-error *ngIf="!isValidPasswordConfirmation()"> {{getErrMsgConfirmPassword()}} </mat-error>
+                    </mat-form-field>
+                    
+                    <div id="agreement" fxLayout="column" fxLayoutAlign="start center">
+                        <mat-checkbox color="primary" formControlName="agreementCtl"> Agree to Terms and Conditions * </mat-checkbox>
+                        <mat-error *ngIf="!isValidAgreement()"> {{getErrMsgAgreement()}} </mat-error>
+                    </div>
+            
+                    <button id="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!isValidSignupForm() || isLoading"> 
+                        Create my account 
+                    </button>         
+            
+                </form>
+    
+            </mat-card-content>
+        </div>
+
+
+    </mat-card>
+
+    
+</section>
