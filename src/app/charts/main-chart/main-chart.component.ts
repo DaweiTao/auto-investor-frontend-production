@@ -35,7 +35,9 @@ export class MainChartComponent implements OnInit, OnDestroy{
     this.candlestickDataSub = this.cs.candlestickData$.subscribe(candlestickData => {
       if (candlestickData) {
         this.currentCandlestickData = candlestickData
-        this.updateCandlestickData(chart)
+        if (candlestickData.candlestickData) {
+          this.updateCandlestickData(chart, candlestickData.candlestickData)
+        }
       }
     })
   }
@@ -83,29 +85,20 @@ export class MainChartComponent implements OnInit, OnDestroy{
           },
           gridLineColor: "#504e4d"
         },
-        // volume
-        // {
-        //   labels: {
-        //     align: "left"
-        //   },
-        //   top: "80%",
-        //   height: "20%",
-        //   offset: 0
-        // }
       ],
       xAxis: [
         {
           crosshair: {
             color: "orange",
             dashStyle: "Dash",
-            // label: {
-            //   style:{
-            //     fontFamily: 'sans-serif',
-            //     fontSize:"16px"
-            //   },
-            //   enabled: true,
-            //   backgroundColor: 'rgba(0,0,0,0.9)'
-            // }
+            label: {
+              style:{
+                fontFamily: 'sans-serif',
+                fontSize:"16px"
+              },
+              enabled: true,
+              backgroundColor: 'rgba(0,0,0,0.9)'
+            }
           },
           labels: {
             autoRotation: [0],
@@ -118,52 +111,11 @@ export class MainChartComponent implements OnInit, OnDestroy{
           },
         }
       ],
+
       tooltip: {
-        enabled: true,
-        headerFormat: '<span style="color: #d1d1d1; font-size: 16px">{point.x:%d %b %Y}</span><br/>',
-        style: {
-          color: "#d1d1d1",
-          fontSize: "16px"
-        },
-        backgroundColor: "rgba(0,0,0,0.9)",
-        shape: "square",
-        headerShape: "callout",
-        borderWidth: 0,
-        shadow: false,
-        positioner: function(width, height, point) {
-          let chart = this.chart
-          let pos
-          // hover label position on x axis
-          if (point.isHeader) {
-            pos = {
-              x: Math.max(
-                // Left side limit
-                chart.plotLeft,
-                Math.min(
-                  point.plotX + chart.plotLeft - width / 2,
-                  // Right side limit
-                  chart.chartWidth - width 
-                )
-              ),
-              y: point.plotY
-            };
-          } else {
-            // the position of stock price hover label
-            if (point.plotX >= (chart.plotWidth / 2)) {
-              pos = {
-                x: point.series.chart.plotLeft,
-                y: 5
-              };
-            } else {
-              pos = {
-                x: point.series.chart.plotWidth - width / 2,
-                y: 5
-              };
-            }
-          }
-          return pos
-        }
+        enabled: false
       },
+
       series: [
         // candlestick
         {
@@ -171,15 +123,16 @@ export class MainChartComponent implements OnInit, OnDestroy{
           id: "candlestick-chart",
           name: `Stock Price`,
           data: [],
+          dataGrouping: {enabled: false},
           point: {
             events: {
               // update hover data
               mouseOver: ((event: any)=>{
-                let hoverI = event.target.index
                 if (!this.currentCandlestickData?.tickerData) {
                   this.cs.hoverData$.next(null)
                   return
                 }
+                let hoverI = event.target.index
                 let hoverTicker: ITicker = this.currentCandlestickData.tickerData[hoverI]
                 let currentClose = hoverTicker.close
                 let prevClose = hoverTicker.prevClose
@@ -207,19 +160,20 @@ export class MainChartComponent implements OnInit, OnDestroy{
                 this.cs.hoverData$.next(null)
               }).bind(this)
             }
-          }
+          },
         },
       ],
+
       rangeSelector: {
         selected: 2,
         enabled: true,
-        allButtonsEnabled: true,
+        allButtonsEnabled: false,
         buttonSpacing: 5,
         buttonTheme: {
           fill: 'none',
           stroke: 'none',
           'stroke-width': 0,
-          r: 2,
+          r: 5,
           style: {
             fontFamily: 'sans-serif',
             fontSize: "16px",
@@ -264,6 +218,12 @@ export class MainChartComponent implements OnInit, OnDestroy{
           }, 
           {
             type: 'year',
+            count: 2,
+            text: '2Y',
+            title: 'View 2 years'
+          }, 
+          {
+            type: 'year',
             count: 5,
             text: '5Y',
             title: 'View 5 years'
@@ -276,8 +236,8 @@ export class MainChartComponent implements OnInit, OnDestroy{
           {
             type: 'all',
             text: 'All',
-            title: 'View all'
-          }
+            title: 'View All'
+          }, 
         ],
         // inputBoxBorderColor: '#d1d1d1',
         inputBoxWidth: 120,
@@ -295,17 +255,20 @@ export class MainChartComponent implements OnInit, OnDestroy{
           fontWeight: 'bold'
         },
       },
+
       plotOptions: {
         hollowcandlestick: {
             color: '#ff2b48',
-            upColor: '#2fc87b'
+            upColor: '#2fc87b',
         },
       },
+
       scrollbar: {
         trackBackgroundColor: 'rgba(0,0,0,0)',
         buttonBackgroundColor: 'rgba(0,0,0,0)',
         buttonArrowColor: 'orange'
       },
+      
       navigator: {
         series: {
           lineColor: 'orange'
@@ -320,6 +283,7 @@ export class MainChartComponent implements OnInit, OnDestroy{
           }
         }
       },
+
       // remove water mark
       credits: {
         enabled: false
@@ -327,9 +291,11 @@ export class MainChartComponent implements OnInit, OnDestroy{
     }
   }
 
-  private updateCandlestickData(chart: Highcharts.Chart): void{
-    chart.series[0].name = this.currentCandlestickData?.contract.symbol!
-    chart.series[0].setData(this.currentCandlestickData?.candlestickData!, true)
+  
+
+  private updateCandlestickData(chart: Highcharts.Chart, newData: number[][]): void{
+    chart.series[0].setData(newData, false)
+    chart.redraw(false)
   }
 
   ngOnDestroy(): void {
