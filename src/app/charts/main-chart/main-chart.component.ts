@@ -291,8 +291,6 @@ export class MainChartComponent implements OnInit, OnDestroy{
     }
   }
 
-  
-
   private updateCandlestickData(chart: Highcharts.Chart, newData: number[][]): void{
     chart.series[0].setData(newData, false)
     chart.redraw(false)
